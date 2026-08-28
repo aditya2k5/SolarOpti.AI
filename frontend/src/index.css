@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+
+  :root {
+    --background: #FFFFFF;
+    --foreground: #0F172A;
+
+    --surface-card: rgba(0, 0, 0, 0.03);
+    --surface-card-hover: rgba(0, 0, 0, 0.06);
+
+    --border-emerald: rgba(16, 185, 129, 0.2);
+
+    --primary-emerald: #10B981;
+    --accent-bright: #059669;
+
+    --text-primary: #0F172A;
+    --text-muted: #64748B;
+  }
+
+
+  .dark {
+    --background: #050B0A;
+    --foreground: #F8FAFC;
+
+    --surface-card: rgba(255, 255, 255, 0.06);
+    --surface-card-hover: rgba(255, 255, 255, 0.10);
+
+    --border-emerald: rgba(16, 185, 129, 0.22);
+
+    --primary-emerald: #10B981;
+    --accent-bright: #34D399;
+
+    --text-primary: #F8FAFC;
+    --text-muted: rgba(248, 250, 252, 0.72);
+  }
+
+  * {
+    border-color: var(--border-emerald);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--text-primary);
+    @apply transition-colors duration-300;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    @apply bg-gradient-to-r from-[#10B981] to-[#34D399] bg-clip-text text-transparent;
+  }
+
+  .card {
+    background-color: var(--surface-card);
+    border: 1px solid var(--border-emerald);
+    @apply rounded-2xl backdrop-blur-md transition-all duration-300;
+  }
+
+  .card:hover {
+    background-color: var(--surface-card-hover);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.15);
+    border-color: rgba(16, 185, 129, 0.4);
+    @apply scale-[1.02];
+  }
+
+  /* REFINED PRIMARY BUTTON */
+  .btn-primary {
+    background-color: var(--primary-emerald);
+    /* We use dark text for both modes because it pops better against Emerald */
+    color: #050B0A; 
+    @apply font-bold py-3 px-6 rounded-xl transition-all duration-300 shadow-lg;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+  }
+
+  .btn-primary:hover {
+    background-color: var(--accent-bright);
+    box-shadow: 0 6px 25px rgba(52, 211, 153, 0.5);
+    @apply scale-[1.02] -translate-y-0.5;
+  }
+
+  /* REFINED OUTLINE BUTTON */
+  .btn-outline {
+    background-color: transparent;
+    border: 2px solid var(--primary-emerald);
+    color: var(--primary-emerald);
+    @apply font-semibold py-3 px-6 rounded-xl transition-all duration-300;
+  }
+
+  .btn-outline:hover {
+    background-color: var(--primary-emerald);
+    /* Flip to dark text on hover to keep it readable */
+    color: #050B0A;
+    box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(16, 185, 129, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+}
+
+.pulse-emerald {
+  animation: pulseGlow 2s infinite;
+}
